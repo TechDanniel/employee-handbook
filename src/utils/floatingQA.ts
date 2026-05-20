@@ -1,5 +1,141 @@
 import type { Match, WorkerMsg } from '../types/floatingQA'
 import { OpenRouter } from '@openrouter/sdk'
+import { reactive } from 'vue'
+
+const LS_OPENROUTER_API_KEY = 'kb_openrouter_api_key'
+const LS_OPENROUTER_CHAT_MODEL = 'kb_openrouter_chat_model'
+const LS_OPENROUTER_EMBEDDING_MODEL = 'kb_openrouter_embedding_model'
+const LS_OPENROUTER_CONFIG_PANEL_OPEN = 'kb_openrouter_config_panel_open'
+
+function readLocalStorage(key: string): string | undefined {
+	try {
+		const v = localStorage.getItem(key)
+		const trimmed = v?.trim()
+		return trimmed ? trimmed : undefined
+	} catch {
+		return undefined
+	}
+}
+
+function writeLocalStorage(key: string, value: string | undefined) {
+	try {
+		const v = value?.trim()
+		if (!v) {
+			localStorage.removeItem(key)
+			return
+		}
+		localStorage.setItem(key, v)
+	} catch {
+		// ignore
+	}
+}
+
+function readBoolLocalStorage(key: string, fallback = false) {
+	try {
+		const v = localStorage.getItem(key)
+		if (v == null) return fallback
+		return v === '1'
+	} catch {
+		return fallback
+	}
+}
+
+function writeBoolLocalStorage(key: string, value: boolean) {
+	try {
+		localStorage.setItem(key, value ? '1' : '0')
+	} catch {
+		// ignore
+	}
+}
+
+export function setStoredOpenRouterConfig(cfg: {
+	apiKey?: string
+	chatModel?: string
+	embeddingModel?: string
+}) {
+	writeLocalStorage(LS_OPENROUTER_API_KEY, cfg.apiKey)
+	writeLocalStorage(LS_OPENROUTER_CHAT_MODEL, cfg.chatModel)
+	writeLocalStorage(LS_OPENROUTER_EMBEDDING_MODEL, cfg.embeddingModel)
+}
+
+export function clearStoredOpenRouterConfig() {
+	writeLocalStorage(LS_OPENROUTER_API_KEY, undefined)
+	writeLocalStorage(LS_OPENROUTER_CHAT_MODEL, undefined)
+	writeLocalStorage(LS_OPENROUTER_EMBEDDING_MODEL, undefined)
+}
+
+export type OpenRouterConfigForm = {
+	apiKey: string
+	chatModel: string
+	embeddingModel: string
+}
+
+export type OpenRouterConfigController = {
+	panelOpen: boolean
+	form: OpenRouterConfigForm
+	save(): void
+	clear(): void
+	togglePanel(): void
+}
+
+export function useOpenRouterConfigController(
+	env: FloatingQaEnv,
+	options?: { setStatus?: (text: string) => void }
+): OpenRouterConfigController {
+	const setStatus = options?.setStatus
+
+	const state = reactive({
+		panelOpen: readBoolLocalStorage(LS_OPENROUTER_CONFIG_PANEL_OPEN, false)
+	})
+
+	const form = reactive<OpenRouterConfigForm>({
+		apiKey: readLocalStorage(LS_OPENROUTER_API_KEY) ?? (env.apiKey ?? ''),
+		chatModel: readLocalStorage(LS_OPENROUTER_CHAT_MODEL) ?? (env.chatModel ?? ''),
+		embeddingModel: readLocalStorage(LS_OPENROUTER_EMBEDDING_MODEL) ?? (env.embeddingModel ?? '')
+	})
+
+	function syncEnvFromCurrentSources() {
+		const fresh = createFloatingQaEnv()
+		env.apiKey = fresh.apiKey
+		env.chatModel = fresh.chatModel
+		env.embeddingModel = fresh.embeddingModel
+	}
+
+	function save() {
+		setStoredOpenRouterConfig({
+			apiKey: form.apiKey,
+			chatModel: form.chatModel,
+			embeddingModel: form.embeddingModel
+		})
+		syncEnvFromCurrentSources()
+		state.panelOpen = false
+		writeBoolLocalStorage(LS_OPENROUTER_CONFIG_PANEL_OPEN, state.panelOpen)
+		setStatus?.('已保存配置（仅存于当前浏览器 localStorage）')
+	}
+
+	function clear() {
+		clearStoredOpenRouterConfig()
+		form.apiKey = ''
+		form.chatModel = ''
+		form.embeddingModel = ''
+		syncEnvFromCurrentSources()
+		state.panelOpen = false
+		writeBoolLocalStorage(LS_OPENROUTER_CONFIG_PANEL_OPEN, state.panelOpen)
+		setStatus?.('已清除本地配置')
+	}
+
+	function togglePanel() {
+		state.panelOpen = !state.panelOpen
+		writeBoolLocalStorage(LS_OPENROUTER_CONFIG_PANEL_OPEN, state.panelOpen)
+		if (!state.panelOpen) return
+		// 打开时刷新表单，避免显示过期值
+		form.apiKey = readLocalStorage(LS_OPENROUTER_API_KEY) ?? (env.apiKey ?? '')
+		form.chatModel = readLocalStorage(LS_OPENROUTER_CHAT_MODEL) ?? (env.chatModel ?? '')
+		form.embeddingModel = readLocalStorage(LS_OPENROUTER_EMBEDDING_MODEL) ?? (env.embeddingModel ?? '')
+	}
+
+	return { get panelOpen() { return state.panelOpen }, set panelOpen(v: boolean) { state.panelOpen = v }, form, save, clear, togglePanel }
+}
 
 export type FloatingQaEnv = {
 	apiKey?: string
@@ -10,15 +146,26 @@ export type FloatingQaEnv = {
 }
 
 export function createFloatingQaEnv(): FloatingQaEnv {
+	const storedApiKey = readLocalStorage(LS_OPENROUTER_API_KEY)
+	const storedChatModel = readLocalStorage(LS_OPENROUTER_CHAT_MODEL)
+	const storedEmbeddingModel = readLocalStorage(LS_OPENROUTER_EMBEDDING_MODEL)
+
 	return {
-		apiKey: import.meta.env.VITE_OPENROUTER_API_KEY as string | undefined,
-		chatModel: import.meta.env.VITE_OPENROUTER_MODEL as string | undefined,
-		embeddingModel: import.meta.env.VITE_OPENROUTER_EMBEDDING_MODEL as string | undefined,
+		apiKey: storedApiKey ?? (import.meta.env.VITE_OPENROUTER_API_KEY as string | undefined),
+		chatModel: storedChatModel ?? (import.meta.env.VITE_OPENROUTER_MODEL as string | undefined),
+		embeddingModel:
+			storedEmbeddingModel ?? (import.meta.env.VITE_OPENROUTER_EMBEDDING_MODEL as string | undefined),
 		kbManifestUrl:
 			(import.meta.env.VITE_KB_MANIFEST_URL as string | undefined) ?? '/kb/manifest.json',
 		kbVectorsUrl:
 			(import.meta.env.VITE_KB_VECTORS_URL as string | undefined) ?? '/kb/vectors.bin'
 	}
+}
+
+export function useFloatingQaEnvWithConfig(options?: { setStatus?: (text: string) => void }) {
+	const env = reactive<FloatingQaEnv>(createFloatingQaEnv())
+	const config = useOpenRouterConfigController(env, { setStatus: options?.setStatus })
+	return { env, config }
 }
 
 export function buildPrompt(question: string, matches: Match[]) {
@@ -184,6 +331,7 @@ export function createFloatingQaService(options: {
 	let initReject: ((e: Error) => void) | null = null
 
 	let pendingSearchResolve: ((m: Match[]) => void) | null = null
+
 	let pendingSearchReject: ((e: Error) => void) | null = null
 
 	function ensureWorker() {
@@ -262,6 +410,9 @@ export function createFloatingQaService(options: {
 		if (!worker) throw new Error('Worker 未初始化')
 		if (!options.env.apiKey) {
 			throw new Error('缺少 OPENROUTER_API_KEY（远端 embedding 需要）')
+		}
+		if (!options.env.embeddingModel) {
+			throw new Error('缺少 OPENROUTER_EMBEDDING_MODEL（远端 embedding 需要）')
 		}
 		return new Promise<Match[]>((resolve: (m: Match[]) => void, reject: (e: Error) => void) => {
 			pendingSearchResolve = resolve

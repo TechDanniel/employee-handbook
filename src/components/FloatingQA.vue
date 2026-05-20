@@ -12,7 +12,12 @@ import { Promotion } from '@element-plus/icons-vue'
 
 import type { Match, AskOptions, UiChatMessage } from '../types/floatingQA'
 import Robot from '../assets/robot.png'
-import { buildPrompt, chat, createFloatingQaEnv, createFloatingQaService } from '../utils/floatingQA'
+import {
+  buildPrompt,
+  chat,
+  createFloatingQaService,
+  useFloatingQaEnvWithConfig
+} from '../utils/floatingQA'
 import {
   deleteThread,
   getOrCreateThread,
@@ -117,7 +122,11 @@ function handleRobotClick(e: MouseEvent) {
   state.open = true
 }
 
-const env = createFloatingQaEnv()
+const { env, config } = useFloatingQaEnvWithConfig({
+  setStatus: (text) => {
+    state.status = text
+  }
+})
 const canCallAi = computed(() => Boolean(env.apiKey && env.chatModel))
 const canSend = computed(() => Boolean(state.question.trim()) && !state.loading && canCallAi.value)
 
@@ -166,7 +175,7 @@ async function ask() {
   state.status = ''
 
   if (!canCallAi.value) {
-    state.status = '缺少 VITE_OPENROUTER_API_KEY 或 VITE_OPENROUTER_MODEL'
+    state.status = '缺少 OpenRouter 配置：API Key / Chat Model（可在下方填写并保存）'
     return
   }
 
@@ -312,6 +321,26 @@ watch(
 
           <div v-if="state.status" class="qa-status" role="status" aria-live="polite">{{ state.status }}</div>
 
+          <div class="qa-config-toggle">
+            <div class="qa-config-toggle-title">OpenRouter 配置</div>
+            <ElButton text size="small" :disabled="state.loading" @click="config.togglePanel">
+              {{ config.panelOpen ? '隐藏' : '配置' }}
+            </ElButton>
+          </div>
+
+          <div v-if="config.panelOpen" class="qa-config">
+            <div class="qa-config-title">仅本机保存（localStorage）</div>
+            <ElInput v-model="config.form.apiKey" :disabled="state.loading" type="password" show-password
+              placeholder="VITE_OPENROUTER_API_KEY" />
+            <ElInput v-model="config.form.chatModel" :disabled="state.loading" placeholder="VITE_OPENROUTER_MODEL" />
+            <ElInput v-model="config.form.embeddingModel" :disabled="state.loading"
+              placeholder="VITE_OPENROUTER_EMBEDDING_MODEL（可选，仅本地知识库检索需要）" />
+            <div class="qa-config-actions">
+              <ElButton size="small" :disabled="state.loading" @click="config.save">保存</ElButton>
+              <ElButton size="small" :disabled="state.loading" @click="config.clear">清除</ElButton>
+            </div>
+          </div>
+
           <div class="qa-toggle">
             <el-tooltip content="开启后会先检索本站文档片段再回答" placement="top-start">
               <div class="qa-toggle-title">使用本地知识库</div>
@@ -405,6 +434,42 @@ watch(
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.qa-config-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--qa-border-soft);
+  border-radius: 10px;
+  background: var(--qa-surface);
+  margin-top: 10px;
+}
+
+.qa-config-toggle-title {
+  font-size: 12px;
+  color: var(--qa-muted);
+}
+
+.qa-config {
+  margin: 10px 0 12px;
+  padding: 10px;
+  border: 1px solid var(--qa-border-soft);
+  border-radius: 10px;
+  background: var(--qa-surface);
+  display: grid;
+  gap: 8px;
+}
+
+.qa-config-title {
+  font-size: 12px;
+  color: var(--qa-muted);
+}
+
+.qa-config-actions {
+  display: flex;
+  gap: 8px;
 }
 
 .qa-fab {

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "createdAt": "2026-05-15T12:58:37.136Z",
+  "embedding": {
+    "model": "qwen/qwen3-embedding-8b",
+    "dimension": 4096
+  },
+  "chunks": [
+    {
+      "id": "docs/src/handbook/code-of-conduct.md#0",
+      "sourcePath": "docs/src/handbook/code-of-conduct.md",
+      "index": 0,
+      "text": "# 02. 行为准则\n\n## 基本原则\n\n- 尊重：尊重每位同事的背景、表达与边界。\n- 专业：对事不对人，事实与数据优先。\n- 合规：遵守法律法规与公司制度。\n\n## 职场行为（示例）\n\n- 禁止歧视、骚扰、霸凌与报复。\n- 不传播或展示令人不适的内容（含低俗、暴力、仇恨）。\n- 会议与协作保持专注：提前准备、按时开始、明确结论与负责人。\n\n## 利益冲突\n\n- 如与供应商/客户/竞品存在亲属或投资关系，应主动申报。\n- 不得利用职务便利谋取不当利益。\n\n## 礼品与招待（简化示例）\n\n- 原则：不影响判断、可公开、可解释。\n- 不确定时：先问直属负责人或合规/财务。\n\n## 对外表达\n\n- 对外发布（媒体、社交平台、公开演讲）涉及公司信息时需遵循公司流程。\n- 禁止泄露客户信息、未公开财务/产品计划、内部代码与文档。"
+    },
+    {
+      "id": "docs/src/handbook/faq.md#0",
+      "sourcePath": "docs/src/handbook/faq.md",
+      "index": 0,
+      "text": "# 06. 常见问题\n\n## Q1：我应该从哪里开始读？\n\n- 建议顺序：总览与入职 → 工作方式 → 休假与考勤 → 信息安全。\n\n## Q2：请假要提前多久？\n\n- 能提前就提前；临时情况尽快在团队内同步，并补齐流程。\n\n## Q3：远程办公时需要注意什么？\n\n- 确保协作时间覆盖；避免在公共场合泄露敏感信息；会议习惯按团队约定执行。\n\n## Q4：我发现了疑似安全问题怎么办？\n\n- 先保护影响面（改密/断开共享/撤回链接），再按“信息安全”章节的上报建议同步。\n\n## Q5：制度和实际不一致怎么办？\n\n- 以最新制度与通知为准；不确定时向直属负责人/HRBP/相关职能确认。"
+    },
+    {
+      "id": "docs/src/handbook/leave.md#0",
+      "sourcePath": "docs/src/handbook/leave.md",
+      "index": 0,
+      "text": "# 04. 休假与考勤\n\n> 本章为演示示例。各类假期天数、适用条件与审批流程以公司制度与当地法规为准。\n\n## 常见假期（示例分类）\n\n- 年假：按工龄与制度享有；建议提前规划，避免集中在项目关键期。\n- 病假：如需连续请假，按要求提供证明材料。\n- 事假：建议说明事由与预计时间，便于团队安排。\n- 婚/产/陪产/育儿假：按当地法规与公司制度执行。\n\n## 请假流程（简化）\n\n1. 提前在考勤系统/IM 流程发起申请\n2. 直属负责人审批\n3. 同步项目协作人（必要时）\n\n## 考勤与迟到早退（示例口径）\n\n- 如遇突发情况（交通/健康/家庭），尽快在团队群说明并补流程。\n- 长期作息调整应与直属负责人提前对齐。\n\n## 加班与调休（示例）\n\n- 是否加班：以工作需要与团队管理为准。\n- 如可调休：建议在加班后尽快安排，避免疲劳累积。"
+    },
+    {
+      "id": "docs/src/handbook/overview.md#0",
+      "sourcePath": "docs/src/handbook/overview.md",
+      "index": 0,
+      "text": "# 01. 总览与入职\n\n## 我们是谁（示例）\n\n- 使命：用简单可靠的产品解决真实问题。\n- 价值观：客户第一、坦诚沟通、对结果负责、持续学习。\n\n## 雇佣与试用（示例口径）\n\n- 录用信息以 offer/劳动合同为准。\n- 试用期目标：明确岗位职责、完成入职任务、通过 1 次试用期评估。\n\n## 入职清单（第一周）\n\n- [ ] 完成账号开通：邮箱、IM、代码仓库/工单系统（如适用）\n- [ ] 领取设备：电脑/门禁/工牌（如适用）\n- [ ] 阅读手册：工作方式、休假考勤、信息安全\n- [ ] 与直属负责人对齐：\n  - 30 天目标\n  - 主要协作人\n  - 绩效与反馈节奏\n\n## 沟通渠道\n\n- 日常沟通：IM 群/项目群（尽量在群里同步可复用信息）\n- 正式流程：工单/邮件（需要可追踪、可归档的事项）\n- 紧急事件：电话/紧急群（仅限影响业务或安全的情况）\n\n## 反馈与申诉（示例）\n\n- 优先与直属负责人沟通。\n- 如不便直接沟通，可联系 HRBP 或指定合规/申诉渠道（以公司实际为准）。"
+    },
+    {
+      "id": "docs/src/handbook/security.md#0",
+      "sourcePath": "docs/src/handbook/security.md",
+      "index": 0,
+      "text": "# 05. 信息安全\n\n## 账号与密码\n\n- 开启多因素认证（MFA）（如系统支持）。\n- 不共享账号；离岗/转岗按流程回收权限。\n- 密码建议使用密码管理器，避免重复使用。\n\n## 设备与数据\n\n- 公司设备优先用于工作；安装软件遵循 IT 规范。\n- 重要数据分级：\n  - 公开：可对外公开\n  - 内部：仅公司内部\n  - 机密：客户数据、未发布信息、密钥等\n- 机密信息不得通过个人邮箱/网盘/非授权 IM 传输。\n\n## 办公场景安全\n\n- 公共场所注意防窥；离开座位锁屏。\n- 会议室白板、纸质材料及时清理。\n\n## 事件上报（示例）\n\n如发现以下情况请尽快上报：\n\n- 账号疑似被盗、异常登录\n- 误发敏感文件/链接\n- 设备遗失或被盗\n\n上报信息建议包含：时间、涉及系统、影响范围、已采取措施。"
+    },
+    {
+      "id": "docs/src/handbook/working.md#0",
+      "sourcePath": "docs/src/handbook/working.md",
+      "index": 0,
+      "text": "# 03. 工作方式\n\n## 工作时间（示例）\n\n- 标准工作时间：周一至周五 9:30–18:30（含午休），以公司实际为准。\n- 弹性：允许在团队约定范围内调整，但需保证协作时间覆盖。\n\n## 远程/混合办公（示例）\n\n- 适用范围：以岗位与团队安排为准。\n- 基本要求：\n  - 保持可联系（IM/电话）\n  - 会议开摄像头按团队约定执行\n  - 不在公共场合外放敏感信息\n\n## 会议与文档\n\n- 会议前：写清楚“目的/议题/期望产出”。\n- 会议中：记录结论、行动项（Owner + Due date）。\n- 会议后：把结论沉淀到文档/工单，避免信息只留在聊天里。\n\n## 请示与决策（轻量规则）\n\n- 可逆决策：快试快迭代（先做再优化）。\n- 不可逆/高风险：先评审（涉及安全、财务、合规、关键客户）。\n\n## 绩效与反馈（示例节奏）\n\n- 1:1：建议每 2 周一次。\n- 反馈：尽量具体到行为与影响，给出可执行建议。"
+    },
+    {
+      "id": "docs/src/index.md#0",
+      "sourcePath": "docs/src/index.md",
+      "index": 0,
+      "text": "# 员工手册（演示版）\n\n这是一份用于演示“员工手册知识库”的精简内容，便于你快速体验：\n\n- 文档写作（VitePress）\n- 右下角 AI 问答（可选结合本地知识库检索）\n\n> 免责声明：本手册仅为演示示例，不构成劳动合同或法律意见；以公司正式制度与签署文件为准。\n\n---\n\n## 快速导航\n\n- [01. 总览与入职](/handbook/overview)\n- [02. 行为准则](/handbook/code-of-conduct)\n- [03. 工作方式](/handbook/working)\n- [04. 休假与考勤](/handbook/leave)\n- [05. 信息安全](/handbook/security)\n- [06. 常见问题](/handbook/faq)\n\n---\n\n## 使用建议（演示）\n\n- 新员工：先读“总览与入职”“工作方式”“休假与考勤”。\n- 管理者：重点看“行为准则”“信息安全”。\n- 有问题：直接在右下角问答框输入关键字（如“年假”“报销”“远程办公”）。"
+    },
+    {
+      "id": "docs/src/useVitepress/themeConfig.md#0",
+      "sourcePath": "docs/src/useVitepress/themeConfig.md",
+      "index": 0,
+      "text": "# 主题配置（themeConfig）\n\n本文讲解 VitePress 的主题配置（`themeConfig`），重点说明：\n\n- `nav` 顶部导航怎么写、链接怎么填\n- `sidebar` 侧边栏怎么组织层级\n- 文档“路由/链接”是如何从文件结构生成的（你应该填什么 `link`）\n\n本项目的配置文件在：`docs/.vitepress/config.ts`。\n\n---\n\n## 先理解：路由是怎么来的\n\nVitePress 的页面路由，来自 **`srcDir` 目录下的 Markdown 文件路径**。\n\n本项目配置了：\n\n```ts\nsrcDir: './src'\n```\n\n而你启动时通常是 `vitepress dev docs`（root = `docs`），所以：\n\n- 实际内容目录是：`docs/src`\n- 路由基于 `docs/src` 下的 `.md` 文件生成\n\n### 路由规则（常用）\n\n假设有这些文件：\n\n```\ndocs/src/index.md\ndocs/src/useVitePress/themeConfig.md\ndocs/src/guide/index.md\ndocs/src/guide/quick-start.md\n```\n\n对应路由一般是：\n\n- `docs/src/index.md` → `/`\n- `docs/src/useVitePress/themeConfig.md` → `/useVitePress/themeConfig`\n- `docs/src/guide/index.md` → `/guide/`\n- `docs/src/guide/quick-start.md` → `/guide/quick-start`\n\n> 说明：\n> - `index.md` 会映射到目录根路由。\n> - 本项目开启了 `cleanUrls: true`，因此链接通常不需要写 `.html`。\n> - 本项目设置了 `base: '/docs/'`，部署到子路径时站点根会变成 `/docs/`，但配置里的链接仍建议写成以 `/` 开头的“站内绝对路径”（例如 `/useVitePress/themeConfig`）。\n\n---\n\n## themeConfig 是什么\n\n`themeConfig` 是默认主题（Default Theme）的配置入口，常见用于：\n\n- 顶部导航 `nav`\n- 侧边栏 `sidebar`\n- 搜索、页脚、社交链接、outline 等\n\n本项目里（节选）：\n\n```ts\nthemeConfig: {\n\tnav: [{ text: 'first start', link: '/' }],\n\nsidebar: [\n\t\t{ text: '使用指南', link: '/' },\n\t\t{\n\t\t\ttext: 'vitePress使用',\n\t\t\titems: [{ text: '主题配置', link: '/useVitePress/themeConfig' }]\n\t\t}\n\t]\n}\n```\n\n---\n\n## nav：顶部导航\n\n`nav` 是一个数组，每一项至少包含：\n\n- `text`: 显示文本\n- `link`: 站内链接（推荐以 `/` 开头）或外链 URL\n\n### 1）最简单写法\n\n```ts\nnav: [\n\t{ text: '首页', link: '/' },\n\t{ text: '主题配置', link: '/useVitePress/themeConfig' },\n]\n```\n\n### 2）下拉菜单\n\n```ts\nnav: [\n\t{\n\t\ttext: '指南',\n\t\titems: [\n\t\t\t{ text: '快速开始', link: '/guide/quick-start' },\n\t\t\t{ text: '主题配置', link: '/useVitePress/themeConfig' },\n\t\t],\n\t},\n]\n```\n\n### link 应该怎么填\n\n核心原则：**`link` 写“路由路径”，而路由来自 Markdown 的文件路径**。\n\n例如：\n\n- 你创建了 `docs/src/guide/quick-start.md`\n- 那么对应 `link` 就是 `/guide/quick-start`\n\n---\n\n## sidebar：侧边栏\n\n`sidebar` 的目标是把页面按层级组织起来，常见结构如下：\n\n- 一级：分组标题（比如“使用指南”、“组件”）\n- 二级：分组下面的页面列表（`items`）\n\n### 1）数组形式（全站统一侧边栏）\n\n适合小站点，所有页面都显示同一个侧边栏："
+    },
+    {
+      "id": "docs/src/useVitepress/themeConfig.md#1",
+      "sourcePath": "docs/src/useVitepress/themeConfig.md",
+      "index": 1,
+      "text": "uick-start.md`\n- 那么对应 `link` 就是 `/guide/quick-start`\n\n---\n\n## sidebar：侧边栏\n\n`sidebar` 的目标是把页面按层级组织起来，常见结构如下：\n\n- 一级：分组标题（比如“使用指南”、“组件”）\n- 二级：分组下面的页面列表（`items`）\n\n### 1）数组形式（全站统一侧边栏）\n\n适合小站点，所有页面都显示同一个侧边栏：\n\n```ts\nsidebar: [\n\t{ text: '使用指南', link: '/' },\n\t{\n\t\ttext: 'VitePress 使用',\n\t\titems: [\n\t\t\t{ text: '主题配置', link: '/useVitePress/themeConfig' },\n\t\t\t{ text: '快速开始', link: '/guide/quick-start' },\n\t\t],\n\t},\n]\n```\n\n### 2）对象形式（按路由前缀切换侧边栏）\n\n当你希望“不同栏目有不同侧边栏”，用对象形式更合适：\n\n```ts\nsidebar: {\n\t'/guide/': [\n\t\t{\n\t\t\ttext: '指南',\n\t\t\titems: [\n\t\t\t\t{ text: '快速开始', link: '/guide/quick-start' },\n\t\t\t],\n\t\t},\n\t],\n\t'/useVitePress/': [\n\t\t{\n\t\t\ttext: 'VitePress 使用',\n\t\t\titems: [\n\t\t\t\t{ text: '主题配置', link: '/useVitePress/themeConfig' },\n\t\t\t],\n\t\t},\n\t],\n}\n```\n\n含义是：\n\n- 当前路由以 `/guide/` 开头 → 使用 `sidebar['/guide/']`\n- 当前路由以 `/useVitePress/` 开头 → 使用 `sidebar['/useVitePress/']`\n\n### sidebar 的常用字段\n\n侧边栏项（以及分组）常用字段：\n\n- `text`: 显示名称\n- `link`: 点击后跳转的路由（可选；如果是分组一般不写）\n- `items`: 子项数组（可选）\n- `collapsed`: 是否默认折叠分组（可选）\n\n示例：\n\n```ts\n{\n\ttext: '指南',\n\tcollapsed: false,\n\titems: [\n\t\t{ text: '快速开始', link: '/guide/quick-start' },\n\t\t{ text: '更多配置', link: '/guide/more' },\n\t],\n}\n```\n\n---\n\n## 实操：新增一个页面并挂到 nav/sidebar\n\n1）创建页面文件（决定路由）\n\n例如新增：`docs/src/guide/quick-start.md`\n\n2）在 `docs/.vitepress/config.ts` 中添加配置\n\n- `nav`：可选（想在顶部出现才加）\n- `sidebar`：推荐加到对应分组的 `items`\n\n```ts\nnav: [\n\t{ text: '快速开始', link: '/guide/quick-start' },\n],\n\nsidebar: {\n\t'/guide/': [\n\t\t{\n\t\t\ttext: '指南',\n\t\t\titems: [{ text: '快速开始', link: '/guide/quick-start' }],\n\t\t},\n\t],\n},\n```\n\n---\n\n## 常见踩坑\n\n1）`link` 写成了文件系统路径\n\n- ❌ `docs/src/guide/quick-start.md`\n- ✅ `/guide/quick-start`\n\n2）`srcDir` 影响路由根\n\n你改了 `srcDir`，所有页面的“路由根”都会跟着变，因此 `nav/sidebar` 的 `link` 也要同步调整。\n\n3）`base` 影响部署路径，不影响 link 写法\n\n配置 `base: '/docs/'` 时：\n\n- 你依然写 `link: '/guide/quick-start'`\n- 部署后实际访问会是 `/docs/guide/quick-start`"
+    }
+  ]
+}

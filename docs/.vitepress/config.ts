@@ -2,13 +2,14 @@ import { defineConfig } from 'vitepress'
 import { resolve } from 'node:path'
 
 const APP_URL = process.env.VITEPRESS_APP_URL || 'http://localhost:5173/'
+const DOCS_BASE = process.env.VITEPRESS_BASE || '/docs/'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'Note Demo',
-  description: '一个最小可用的 VitePress 文档站点示例。',
+  title: '员工手册（演示版）',
+  description: '用于演示的员工手册知识库（VitePress）。',
 
-  base: '/docs/',
+  base: DOCS_BASE,
 
   cleanUrls: true,
   lastUpdated: true,
@@ -22,17 +23,26 @@ export default defineConfig({
 
   themeConfig: {
     nav: [
-        { text: 'Quick Start', link: '/' },
-        { text: '首页', link: APP_URL }
+        { text: '员工手册', link: '/' },
+        { text: '应用首页', link: APP_URL }
     ],
 
     sidebar: [
-      { text: '使用指南',link: '/' },
-      { 
-        text: 'vitePress使用', 
+      { text: '手册首页', link: '/' },
+      {
+        text: '员工手册',
         items: [
-          { text: '主题配置', link: '/useVitePress/themeConfig' },
-        ] 
+          { text: '01. 总览与入职', link: '/handbook/overview' },
+          { text: '02. 行为准则', link: '/handbook/code-of-conduct' },
+          { text: '03. 工作方式', link: '/handbook/working' },
+          { text: '04. 休假与考勤', link: '/handbook/leave' },
+          { text: '05. 信息安全', link: '/handbook/security' },
+          { text: '06. 常见问题', link: '/handbook/faq' },
+        ],
+      },
+      {
+        text: '站点维护（可选）',
+        items: [{ text: 'VitePress 主题配置', link: '/useVitePress/themeConfig' }],
       },
     ],
 
