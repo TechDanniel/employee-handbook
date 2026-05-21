@@ -5,7 +5,14 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 
+function resolveBase() {
+  const repo = process.env.GITHUB_REPOSITORY?.split('/')?.[1]
+  if (process.env.GITHUB_ACTIONS === 'true' && repo) return `/${repo}/`
+  return '/'
+}
+
 export default defineConfig({
+  base: resolveBase(),
   plugins: [
     vue(),
      AutoImport({
