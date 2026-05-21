@@ -145,6 +145,34 @@ export type FloatingQaEnv = {
 	kbVectorsUrl: string
 }
 
+function normalizeBaseUrl(baseUrl: string | undefined) {
+	const base = baseUrl && baseUrl.trim() ? baseUrl.trim() : '/'
+	return base.endsWith('/') ? base : `${base}/`
+}
+
+function resolveKbBaseUrl() {
+	const explicit = import.meta.env.VITE_KB_BASE_URL as string | undefined
+	if (explicit && explicit.trim()) return normalizeBaseUrl(explicit)
+
+	const base = normalizeBaseUrl(import.meta.env.BASE_URL)
+	if (base.endsWith('/docs/')) return base.slice(0, -'docs/'.length)
+	return base
+}
+
+function withBaseUrl(urlOrPath: string) {
+	const input = urlOrPath.trim()
+	if (!input) return input
+	// absolute URL (or protocol-relative)
+	if (/^(https?:)?\/\//i.test(input)) return input
+
+	const base = resolveKbBaseUrl()
+	// already prefixed with base
+	if (input.startsWith(base)) return input
+
+	const stripped = input.startsWith('/') ? input.slice(1) : input
+	return `${base}${stripped}`
+}
+
 export function createFloatingQaEnv(): FloatingQaEnv {
 	const storedApiKey = readLocalStorage(LS_OPENROUTER_API_KEY)
 	const storedChatModel = readLocalStorage(LS_OPENROUTER_CHAT_MODEL)
@@ -155,10 +183,12 @@ export function createFloatingQaEnv(): FloatingQaEnv {
 		chatModel: storedChatModel ?? (import.meta.env.VITE_OPENROUTER_MODEL as string | undefined),
 		embeddingModel:
 			storedEmbeddingModel ?? (import.meta.env.VITE_OPENROUTER_EMBEDDING_MODEL as string | undefined),
-		kbManifestUrl:
-			(import.meta.env.VITE_KB_MANIFEST_URL as string | undefined) ?? '/kb/manifest.json',
-		kbVectorsUrl:
-			(import.meta.env.VITE_KB_VECTORS_URL as string | undefined) ?? '/kb/vectors.bin'
+		kbManifestUrl: withBaseUrl(
+			(import.meta.env.VITE_KB_MANIFEST_URL as string | undefined) ?? 'kb/manifest.json'
+		),
+		kbVectorsUrl: withBaseUrl(
+			(import.meta.env.VITE_KB_VECTORS_URL as string | undefined) ?? 'kb/vectors.bin'
+		)
 	}
 }
 
